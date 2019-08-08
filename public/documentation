@@ -32,11 +32,13 @@ review your code to check to see why it is!
 
 enabling routing on app
 Links aren't working as expected
+was resolved using a double spread operator to combine two objs into one
+https://stackoverflow.com/questions/49470037/how-to-pass-several-props-in-spread-operator-in-react
 /////////////////////////////////////////////////
 currently the center temperature area within the hourly table
 shows crooked
 
-broke the api with too many calls
+Form isn't set correctly, need to review this for how they setup form and get this resolved.
 https://medium.com/@peterekeneeze/build-a-react-js-weather-app-with-stateless-functional-components-e61567004b54
 I should break this down into more parts 
 

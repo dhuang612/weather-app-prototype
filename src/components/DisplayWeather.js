@@ -20,18 +20,23 @@ class DisplayWeather extends Component {
       weatherIcon: ''
     };
   }
-  componentDidMount() {
-    this.switchToHourly();
 
+  //not being able to add this.fetchWeatherData to this is causing it to remount.
+  componentDidMount() {
     console.log('I am mounting');
   }
+  handleSubmit = e => {
+    const [input] = e.target.elements;
+    console.log('city and country ', input.value);
+    e.preventDefault();
+  };
 
   fetchWeatherData = async e => {
     const PATH_BASE = 'https://api.openweathermap.org/';
     const REQ_PATH = 'data/2.5/forecast?';
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
-    e.preventDefault();
+
     const units = 'imperial';
     const cnt = 10;
 
@@ -86,10 +91,6 @@ array.forEach
       hourlyWeather: [...sortedData],
       weatherIcon: sortedData[0].weatherIcon
     });
-  };
-
-  switchToHourly = () => {
-    this.setState({ showHourlyWeather: !this.state.showHourlyWeather });
   };
 
   render() {

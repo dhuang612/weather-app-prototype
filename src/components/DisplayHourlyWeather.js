@@ -9,13 +9,18 @@ class HourlyWeather extends Component {
     this.state = {
       HourlyWeather: this.props.location.state.hourlyWeather,
       HourlyData: [],
+      savedcurrentweather: this.props.location.state.currentweatherinfo,
       showCurrentWeather: false
     };
   }
-  //if removed this makes hourly not display
+
   componentDidMount() {
-    console.log(this.props.location.state.hourlyWeather);
+    console.log(
+      this.props.location.state.hourlyWeather,
+      this.props.location.state.currentweather
+    );
     console.log(this.state.HourlyWeather);
+    //if removed this makes hourly not display
     this.sortHourlyData();
   }
 
@@ -39,9 +44,7 @@ class HourlyWeather extends Component {
 
     //next steps get data from new object and sort into arrays to save in state.
   };
-  switchToCurrent = () => {
-    this.setState({ showCurrentWeather: !this.state.showCurrentWeather });
-  };
+
   /*
  ? (
         <div>
@@ -93,7 +96,9 @@ class HourlyWeather extends Component {
         <Link
           to={{
             pathname: '/current',
-            state: { fetchWeatherData: this.state.fetchWeatherData }
+            state: {
+              savedcurrentweather: this.savedcurrentweather
+            }
           }}
         >
           current weather
