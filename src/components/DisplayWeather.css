@@ -1,0 +1,18 @@
+.weather {
+  color: gray;
+}
+
+.day {
+  padding-right: 15px;
+}
+
+.high {
+  padding: 15px;
+}
+
+.low {
+  padding: 16px;
+}
+.type {
+  padding: 15px;
+}

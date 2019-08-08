@@ -1,0 +1,41 @@
+Debugging in the Editor as an alternative to eslint in the console.
+https://facebook.github.io/create-react-app/docs/setting-up-your-editor
+Visual Studio Code
+
+Developing Components in Isolation
+storybook for React or other 3rd party tools can allow you to see the individual states
+within component
+
+
+
+Child-to-parent communication is a little more complicated. The standard way of doing this is to have the parent pass a function to the child through props. 
+The child then calls this function at some point and passes it a value that the parent is supposed to react to. 
+We then write the functionality for the parent's reaction inside the parent component.
+
+next thing I want to work on is adding in a location where people can search
+for a city and get the api to make a new call out and get additional information
+->
+store data in some sort of local storage?
+
+next things to work on is to get working on
+React Router
+
+switch statements 
+-> to show 
+https://stackoverflow.com/questions/44046037/if-else-statement-inside-jsx-reactjs
+errors:
+///////////////////////////////////////////////////
+my component is being re-mounted for some reason.
+it shouldn't be because it's a child -> confirm this.
+confirmed that the component is re-mounting through console.log
+review your code to check to see why it is!
+/////////////////////////////////////////////////
+currently the center temperature area within the hourly table
+shows crooked
+
+broke the api with too many calls
+https://medium.com/@peterekeneeze/build-a-react-js-weather-app-with-stateless-functional-components-e61567004b54
+I should break this down into more parts 
+
+
+ ////   
