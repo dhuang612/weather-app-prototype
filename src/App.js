@@ -15,7 +15,9 @@ class App extends React.Component {
         <Route
           exact
           path="/"
-          render={() => <DisplayWeather {...this.props} />}
+          render={routeProps => (
+            <DisplayWeather {...{ ...routeProps, ...this.props }} />
+          )}
         />
         <Route
           path="/hourly"
@@ -28,6 +30,18 @@ class App extends React.Component {
             />
           )}
         />
+        <Route
+          path="/current"
+          render={routeProps => (
+            <DisplayWeather
+              {...{
+                ...routeProps,
+                ...this.props
+              }}
+            />
+          )}
+        />
+
         <div className="App">
           <h1>Weather forecast</h1>
           <DisplayWeather />
