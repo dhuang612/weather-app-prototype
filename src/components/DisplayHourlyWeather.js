@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { isTemplateElement } from '@babel/types';
+import { Link } from 'react-router-dom';
 import DisplayWeather from './DisplayWeather';
 //refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
@@ -42,12 +43,19 @@ class HourlyWeather extends Component {
   switchToCurrent = () => {
     this.setState({ showCurrentWeather: !this.state.showCurrentWeather });
   };
+  /*
+ ? (
+        <div>
+          <Form loadWeather={this.fetchWeatherData} />
+        </div>
+      ) : (
+  */
 
   render() {
     console.log(this.state.currentweather);
     const { HourlyData, showCurrentWeather } = this.state;
-    if (!showCurrentWeather) {
-      return (
+    {
+      return this.state.hourlyWeather !== '' ? (
         <div>
           <h1>Hourly weather</h1>
           {HourlyData.map((item, index) => {
@@ -85,17 +93,11 @@ class HourlyWeather extends Component {
               </div>
             );
           })}
-          <button
-            type="button"
-            onClick={this.switchToCurrent}
-            currentweatherinfo={this.state.currentweatherinfo}
-          >
-            Go back to current
-          </button>
+          )
         </div>
+      ) : (
+        <Link to="/current">Go back to current</Link>
       );
-    } else {
-      return <DisplayWeather />;
     }
   }
 }
@@ -110,7 +112,8 @@ currenttime={this.state.currenttime}
           currentweather={this.state.currentweather}
 button shouldn't be reloading
 
-
-
+<div>
+          <DisplayWeather />
+        </div>
 
 */

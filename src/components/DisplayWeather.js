@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import HourlyWeather from '../components/DisplayHourlyWeather';
 import Form from './form';
 import axios from 'axios';
@@ -110,27 +110,16 @@ array.forEach
       showHourlyWeather
     } = this.state;
     console.log(currentweather);
-    if (!currentweather) {
-      return (
+    {
+      return currentweather == '' ? (
         <div>
           <Form loadWeather={this.fetchWeatherData} />
         </div>
-      );
-    }
-    if (!showHourlyWeather) {
-      return (
-        <HourlyWeather
-          hourlyWeather={this.state.hourlyWeather}
-          currentweatherinfo={this.state.currentweatherinfo}
-        />
-      );
-    }
-    if (currentweather !== '') {
-      return (
+      ) : (
         <div className="ui container">
           <br />
           <h1>Current temperature</h1>
-          <table class="ui basic table">
+          <table className="ui basic table">
             <thead>
               <tr>
                 <th> time</th>
@@ -159,9 +148,7 @@ array.forEach
               </tr>
             </tbody>
           </table>
-          <button onClick={this.switchToHourly}>
-            switch to hourly weather
-          </button>
+          <Link to="/hourly">Hourly weather</Link>
         </div>
       );
     }
@@ -169,3 +156,19 @@ array.forEach
 }
 
 export default DisplayWeather;
+
+/*
+ if (!showHourlyWeather) {
+      return (
+        <HourlyWeather
+          hourlyWeather={this.state.hourlyWeather}
+          currentweatherinfo={this.state.currentweatherinfo}
+        />
+      );
+    }
+  }
+}
+
+
+
+*/
