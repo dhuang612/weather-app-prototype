@@ -29,6 +29,9 @@ my component is being re-mounted for some reason.
 it shouldn't be because it's a child -> confirm this.
 confirmed that the component is re-mounting through console.log
 review your code to check to see why it is!
+
+enabling routing on app
+Links aren't working as expected
 /////////////////////////////////////////////////
 currently the center temperature area within the hourly table
 shows crooked

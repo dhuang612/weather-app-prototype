@@ -7,19 +7,20 @@ class HourlyWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      HourlyWeather: this.props,
+      hourlyWeather: '',
       HourlyData: [],
       showCurrentWeather: false
     };
   }
   //if removed this makes hourly not display
   componentDidMount() {
-    this.sortHourlyData();
+    console.log(this.props.location.state.hourlyWeather);
+    //this.props.location.state.hourlyWeather
   }
 
   sortHourlyData = data => {
     //getting info from state and putting information into array.
-    const dataSet = Object.entries(this.state.HourlyWeather).map(
+    const dataSet = Object.entries(this.props.location.state.hourlyWeather).map(
       ([key, value]) => {
         {
           const DataSorted = [].concat(value);
@@ -53,9 +54,9 @@ class HourlyWeather extends Component {
 
   render() {
     console.log(this.state.currentweather);
-    const { HourlyData, showCurrentWeather } = this.state;
+    const { HourlyData, showCurrentWeather, HourlyWeather } = this.state;
     {
-      return this.state.hourlyWeather !== '' ? (
+      return HourlyWeather !== null ? (
         <div>
           <h1>Hourly weather</h1>
           {HourlyData.map((item, index) => {
@@ -93,7 +94,6 @@ class HourlyWeather extends Component {
               </div>
             );
           })}
-          )
         </div>
       ) : (
         <Link to="/current">Go back to current</Link>

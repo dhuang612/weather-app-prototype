@@ -22,6 +22,7 @@ class DisplayWeather extends Component {
   }
   componentDidMount() {
     this.switchToHourly();
+
     console.log('I am mounting');
   }
 
@@ -83,17 +84,8 @@ array.forEach
       currenttime: sortedData[0].dt,
       currentweather: sortedData[0].weather,
       hourlyWeather: [...sortedData],
-      weatherIcon: sortedData[0].weatherIcon,
-      currentweatherinfo: {
-        time: sortedData[0].dt,
-        weather: sortedData[0].weather,
-        icon: sortedData[0].weatherIcon
-      }
+      weatherIcon: sortedData[0].weatherIcon
     });
-  };
-  hourlyWeatherData = () => {
-    const { hourlyWeather } = this.state;
-    console.log(hourlyWeather);
   };
 
   switchToHourly = () => {
@@ -109,9 +101,9 @@ array.forEach
       hourlyWeather,
       showHourlyWeather
     } = this.state;
-    console.log(currentweather);
+    console.log(hourlyWeather);
     {
-      return currentweather == '' ? (
+      return currentweather === '' ? (
         <div>
           <Form loadWeather={this.fetchWeatherData} />
         </div>
@@ -148,7 +140,14 @@ array.forEach
               </tr>
             </tbody>
           </table>
-          <Link to="/hourly">Hourly weather</Link>
+          <Link
+            to={{
+              pathname: '/hourly',
+              state: { hourlyWeather: hourlyWeather }
+            }}
+          >
+            Hourly weather
+          </Link>
         </div>
       );
     }
@@ -158,6 +157,7 @@ array.forEach
 export default DisplayWeather;
 
 /*
+
  if (!showHourlyWeather) {
       return (
         <HourlyWeather
@@ -168,6 +168,11 @@ export default DisplayWeather;
     }
   }
 }
+//don't believe this does anything.
+hourlyWeatherData = () => {
+    const { hourlyWeather } = this.state;
+    console.log(hourlyWeather);
+  };
 
 
 

@@ -12,19 +12,19 @@ class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={DisplayWeather} />
         <Route
-          path="current"
-          render={props => (
-            <DisplayWeather {...props} loadWeather={this.fetchWeatherData} />
-          )}
+          exact
+          path="/"
+          render={() => <DisplayWeather {...this.props} />}
         />
         <Route
-          path="hourly"
-          render={props => (
+          path="/hourly"
+          render={routeProps => (
             <DisplayHourlyWeather
-              {...props}
-              hourlyWeather={this.state.hourlyWeather}
+              {...{
+                ...routeProps,
+                ...this.props
+              }}
             />
           )}
         />
@@ -38,3 +38,7 @@ class App extends React.Component {
 }
 
 export default App;
+/*
+<Route path="/" exact component={DisplayWeather} />
+
+*/
