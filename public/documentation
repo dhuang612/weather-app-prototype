@@ -43,4 +43,11 @@ https://medium.com/@peterekeneeze/build-a-react-js-weather-app-with-stateless-fu
 I should break this down into more parts 
 
 
+react switch components
+-> moved data down to app
+-> resolved api call out!
+need to fix and resolve switching out components
+=== found a method involving switch ===
+
+
  ////   
