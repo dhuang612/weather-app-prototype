@@ -69,14 +69,6 @@ class DisplayWeather extends Component {
             </tr>
           </tbody>
         </table>
-        <Link
-          to={{
-            pathname: '/hourly',
-            state: { hourlyWeather: hourlyWeather }
-          }}
-        >
-          Hourly weather
-        </Link>
       </div>
     );
   }

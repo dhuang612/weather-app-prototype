@@ -14,7 +14,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHourlyWeather: false,
       currentforecast: '',
       currenttime: '',
       currentweather: '',
@@ -86,21 +85,24 @@ array.forEach
       weatherIcon: sortedData[0].weatherIcon
     });
   };
-  getComponent() {
+  getComponent({ prop, state }) {
     let component;
-    switch (this.state.currentComponent) {
-      case 'compA':
-        component = <CompA />;
-        break;
-      case 'compB':
-        component = <CompB />;
-        break;
-      case 'compC':
-        component = <CompC />;
-        break;
-      case 'compD':
-        component = <CompD />;
-        break;
+    switch (this.state.weather) {
+      case this.weatherIcon:
+        return (component = (
+          <DisplayWeather state={this.state.currentweather} />
+        ));
+
+      case this.hourlyWeather:
+        return (component = (
+          <DisplayHourlyWeather prop={this.state.hourlyWeather} />
+        ));
+
+      case !this.weatherIcon:
+        return (component = <Form prop={this.state.fetchWeatherData} />);
+
+      default:
+        return null;
     }
   }
 
@@ -110,38 +112,14 @@ array.forEach
       currenttime,
       currentweather,
       weatherIcon,
-      hourlyWeather,
-      showHourlyWeather
+      hourlyWeather
     } = this.state;
     console.log(this.state);
     return (
       <div className="App">
         <h1>Weather forecast</h1>
-
-        <Router>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={props => (
-                <Form {...props} loadWeather={this.fetchWeatherData} />
-              )}
-            />
-
-            <Route
-              path="/current"
-              render={props => (
-                <DisplayWeather
-                  {...props}
-                  currentforecast={this.state.currentforecast}
-                  currenttime={this.state.currenttime}
-                  currentweather={this.state.currentweather}
-                  weatherIcon={this.state.weatherIcon}
-                />
-              )}
-            />
-          </Switch>
-        </Router>
+        <Form loadWeather={this.fetchWeatherData} />
+        {this.getComponent(this.state)}
       </div>
     );
   }
@@ -167,5 +145,32 @@ export default App;
 
 
              <Form loadWeather={this.fetchWeatherData} />
+
+ <Router>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={props => (
+                <Form {...props} loadWeather={this.fetchWeatherData} />
+              )}
+            />
+
+            <Route
+              path="/current"
+              render={props => (
+                <DisplayWeather
+                  {...props}
+                  currentforecast={this.state.currentforecast}
+                  currenttime={this.state.currenttime}
+                  currentweather={this.state.currentweather}
+                  weatherIcon={this.state.weatherIcon}
+                />
+              )}
+            />
+          </Switch>
+        </Router>
+
+
 
 */
