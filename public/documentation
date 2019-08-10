@@ -48,6 +48,8 @@ react switch components
 -> resolved api call out!
 need to fix and resolve switching out components
 === found a method involving switch ===
-
+got the switch function working with help from the internet.
+currently trying to get the conditions to render correctly.
+need to investigate into this more.
 
  ////   

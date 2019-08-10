@@ -7,18 +7,13 @@ class HourlyWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      HourlyWeather: this.props.location.state.hourlyWeather,
+      HourlyWeather: this.props.hourlyWeather,
       HourlyData: [],
-      savedcurrentweather: this.props.location.state.currentweatherinfo,
-      showCurrentWeather: false
+      savedcurrentweather: this.props.currentweatherinfo
     };
   }
 
   componentDidMount() {
-    console.log(
-      this.props.location.state.hourlyWeather,
-      this.props.location.state.currentweather
-    );
     console.log(this.state.HourlyWeather);
     //if removed this makes hourly not display
     this.sortHourlyData();
@@ -93,16 +88,6 @@ class HourlyWeather extends Component {
             </div>
           );
         })}
-        <Link
-          to={{
-            pathname: '/current',
-            state: {
-              savedcurrentweather: this.savedcurrentweather
-            }
-          }}
-        >
-          current weather
-        </Link>
       </div>
     );
   }

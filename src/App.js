@@ -18,7 +18,8 @@ class App extends React.Component {
       currenttime: '',
       currentweather: '',
       hourlyWeather: [],
-      weatherIcon: ''
+      weatherIcon: '',
+      fetchedweatherdata: false
     };
   }
   componentDidMount() {}
@@ -82,24 +83,26 @@ array.forEach
       currenttime: sortedData[0].dt,
       currentweather: sortedData[0].weather,
       hourlyWeather: [...sortedData],
-      weatherIcon: sortedData[0].weatherIcon
+      weatherIcon: sortedData[0].weatherIcon,
+      fetchedweatherdata: true
     });
   };
-  getComponent({ prop, state }) {
-    let component;
+  getComponent({ props, state }) {
     switch (this.state.weather) {
-      case this.weatherIcon:
-        return (component = (
-          <DisplayWeather state={this.state.currentweather} />
-        ));
-
-      case this.hourlyWeather:
-        return (component = (
-          <DisplayHourlyWeather prop={this.state.hourlyWeather} />
-        ));
-
-      case !this.weatherIcon:
-        return (component = <Form prop={this.state.fetchWeatherData} />);
+      case this.fetchedweatherdata === true:
+        return (
+          <DisplayWeather
+            currentweather={this.state.currentweather}
+            currentforecast={this.state.currentforecast}
+            currenttime={this.state.currenttime}
+          />
+        );
+      case !this.hourlyWeather:
+        return (
+          <DisplayHourlyWeather hourlyWeather={this.state.hourlyWeather} />
+        );
+      case this.fetchedweatherdata:
+        return <Form loadWeather={this.fetchWeatherData} />;
 
       default:
         return null;
@@ -112,14 +115,15 @@ array.forEach
       currenttime,
       currentweather,
       weatherIcon,
-      hourlyWeather
+      hourlyWeather,
+      fetchedweatherdata
     } = this.state;
     console.log(this.state);
     return (
       <div className="App">
         <h1>Weather forecast</h1>
-        <Form loadWeather={this.fetchWeatherData} />
-        {this.getComponent(this.state)}
+
+        {this.getComponent({ state: this.state })}
       </div>
     );
   }
@@ -127,49 +131,6 @@ array.forEach
 
 export default App;
 /*
-<Route path="/" exact component={DisplayWeather} />
-
- <Route
-              path="/"
-              exact
-              render={props => (
-                <DisplayWeather
-                  {...props}
-                  currentforecast={this.state.currentforecast}
-                  currenttime={this.state.currenttime}
-                  currentweather={this.state.currentweather}
-                />
-              )}
-            />
-
-
-
-             <Form loadWeather={this.fetchWeatherData} />
-
- <Router>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={props => (
-                <Form {...props} loadWeather={this.fetchWeatherData} />
-              )}
-            />
-
-            <Route
-              path="/current"
-              render={props => (
-                <DisplayWeather
-                  {...props}
-                  currentforecast={this.state.currentforecast}
-                  currenttime={this.state.currenttime}
-                  currentweather={this.state.currentweather}
-                  weatherIcon={this.state.weatherIcon}
-                />
-              )}
-            />
-          </Switch>
-        </Router>
 
 
 

@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HourlyWeather from '../components/DisplayHourlyWeather';
 
-import { fetchWeatherData } from '../App';
-
 import './DisplayWeather.css';
 
 class DisplayWeather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHourlyWeather: false,
       currentforecast: this.props.currentforecast,
       currenttime: this.props.currenttime,
       currentweather: this.props.currentweather,
@@ -35,7 +32,7 @@ class DisplayWeather extends Component {
       showHourlyWeather
     } = this.state;
 
-    console.log(hourlyWeather);
+    console.log(this.state);
     return (
       <div className="ui container">
         <br />
