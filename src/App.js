@@ -19,17 +19,23 @@ class App extends React.Component {
       currentweather: '',
       hourlyWeather: [],
       weatherIcon: '',
-      fetchedweatherdata: false
+      fetchedweatherdata: false,
+      city: undefined,
+      country: undefined
     };
   }
-  componentDidMount() {}
+
+  componentDidUpdate() {
+    this.getComponent(this.state);
+  }
 
   fetchWeatherData = async e => {
     const PATH_BASE = 'https://api.openweathermap.org/';
     const REQ_PATH = 'data/2.5/forecast?';
+    //review into how you are getting the data from the form.
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
-    e.preventDefault();
+
     const units = 'imperial';
     const cnt = 10;
 
@@ -83,13 +89,12 @@ array.forEach
       currenttime: sortedData[0].dt,
       currentweather: sortedData[0].weather,
       hourlyWeather: [...sortedData],
-      weatherIcon: sortedData[0].weatherIcon,
-      fetchedweatherdata: true
+      weatherIcon: sortedData[0].weatherIcon
     });
   };
-  getComponent({ props, state }) {
+  getComponent(props = {} || this.props, state) {
     switch (this.state.weather) {
-      case this.fetchedweatherdata === true:
+      case !this.fetchedweatherdata:
         return (
           <DisplayWeather
             currentweather={this.state.currentweather}
@@ -97,12 +102,24 @@ array.forEach
             currenttime={this.state.currenttime}
           />
         );
+
       case !this.hourlyWeather:
         return (
           <DisplayHourlyWeather hourlyWeather={this.state.hourlyWeather} />
         );
+
       case this.fetchedweatherdata:
-        return <Form loadWeather={this.fetchWeatherData} />;
+        return (
+          <Form
+            onSubmit={
+              (this.loadWeather = (this.fetchWeatherData(
+                this.props.loadWeather
+              ),
+              this.onSubmit))
+            }
+            fetchedweatherdata={this.state.fetchedweatherdata}
+          />
+        );
 
       default:
         return null;
@@ -110,20 +127,12 @@ array.forEach
   }
 
   render() {
-    const {
-      currentforecast,
-      currenttime,
-      currentweather,
-      weatherIcon,
-      hourlyWeather,
-      fetchedweatherdata
-    } = this.state;
     console.log(this.state);
     return (
       <div className="App">
         <h1>Weather forecast</h1>
 
-        {this.getComponent({ state: this.state })}
+        {this.getComponent(this.state)}
       </div>
     );
   }

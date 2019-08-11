@@ -29,7 +29,8 @@ class DisplayWeather extends Component {
       currentweather,
       fetchedWeatherData,
       hourlyWeather,
-      showHourlyWeather
+      showHourlyWeather,
+      weatherIcon
     } = this.state;
 
     console.log(this.state);
@@ -56,7 +57,7 @@ class DisplayWeather extends Component {
                   <img
                     src={
                       'https://openweathermap.org/img/wn/' +
-                      this.state.weatherIcon +
+                      weatherIcon +
                       '.png'
                     }
                   />

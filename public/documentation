@@ -52,4 +52,14 @@ got the switch function working with help from the internet.
 currently trying to get the conditions to render correctly.
 need to investigate into this more.
 
- ////   
+updated code on form so that when you onSubmit the form
+this.setState updates fetchedWeatherData to be true.
+this has now fixed the form being shown first.
+what is still not working is the data from the form is not
+being passed to <DisplayWeather>
+
+updated Stackoverflow question and asked multiple times on the internet
+update the state under <App> because the way I am currently trying to store
+the values isn't working
+==> will review this tomorrow.
+////   
