@@ -20,21 +20,22 @@ class App extends React.Component {
       hourlyWeather: [],
       weatherIcon: '',
       fetchedweatherdata: false,
-      city: undefined,
-      country: undefined
+      city: this.props.city,
+      country: this.props.country
     };
   }
 
-  componentDidUpdate() {
-    this.getComponent(this.state);
-  }
-
   fetchWeatherData = async e => {
+    const city = '';
+    const country = '';
+    this.setState({
+      city: this.state.city,
+      country: this.state.country
+    });
+
     const PATH_BASE = 'https://api.openweathermap.org/';
     const REQ_PATH = 'data/2.5/forecast?';
     //review into how you are getting the data from the form.
-    const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
 
     const units = 'imperial';
     const cnt = 10;
@@ -46,7 +47,6 @@ class App extends React.Component {
     const response = await axios.get(url);
     this.sortData(response.data);
   };
-
   convertTimefromUnix = dt => {
     const date = new Date(dt * 1000);
     const hours = date.getHours();
@@ -111,13 +111,9 @@ array.forEach
       case this.fetchedweatherdata:
         return (
           <Form
-            onSubmit={
-              (this.loadWeather = (this.fetchWeatherData(
-                this.props.loadWeather
-              ),
-              this.onSubmit))
-            }
-            fetchedweatherdata={this.state.fetchedweatherdata}
+            onSubmit={this.onSubmit}
+            loadWeather={(this.props.city, this.props.country)}
+            fetchWeatherData={() => this.fetchWeatherData(this.loadWeather)}
           />
         );
 
@@ -127,6 +123,7 @@ array.forEach
   }
 
   render() {
+    const { loadWeather } = this.state;
     console.log(this.state);
     return (
       <div className="App">
@@ -140,7 +137,9 @@ array.forEach
 
 export default App;
 /*
-
-
-
+   <Form 
+    onSubmit={this.onSubmit}
+    loadWeather={this.props.loadWeather}
+    fetchWeatherData={this.fetchWeatherData}
+/>
 */
