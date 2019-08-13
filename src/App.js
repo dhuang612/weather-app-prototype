@@ -24,15 +24,23 @@ class App extends React.Component {
       country: this.props.country
     };
   }
+  componentDidUpdate(prevState) {
+    if (this.state.fetchedweatherdata !== prevState.fetchedweatherdata) {
+      console.log('city and country:' + this.state.city, this.state.country);
+      this.getComponent(this.state);
+    }
+  }
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
   fetchWeatherData = async e => {
-    const city = '';
-    const country = '';
-    this.setState({
-      city: this.state.city,
-      country: this.state.country
-    });
+    const city = this.props.city;
+    const country = this.props.country;
 
+    console.log(city, country);
     const PATH_BASE = 'https://api.openweathermap.org/';
     const REQ_PATH = 'data/2.5/forecast?';
     //review into how you are getting the data from the form.
@@ -111,9 +119,13 @@ array.forEach
       case this.fetchedweatherdata:
         return (
           <Form
-            onSubmit={this.onSubmit}
-            loadWeather={(this.props.city, this.props.country)}
-            fetchWeatherData={() => this.fetchWeatherData(this.loadWeather)}
+            onChange={this.handleChange}
+            {...this.state}
+            fetchWeatherData={this.fetchWeatherData}
+            onSubmit={() => {
+              this.onSubmit();
+              this.fetchWeatherData(this.state.city, this.state.country);
+            }}
           />
         );
 

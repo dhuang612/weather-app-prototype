@@ -62,4 +62,8 @@ updated Stackoverflow question and asked multiple times on the internet
 update the state under <App> because the way I am currently trying to store
 the values isn't working
 ==> will review this tomorrow.
+
+https://www.robinwieruch.de/conditional-rendering-react/#switch-case-operator
+
+componentDidUpdate(previousProps, nextprops)
 ////   
