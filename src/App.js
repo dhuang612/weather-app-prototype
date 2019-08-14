@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
 import DisplayWeather from './components/DisplayWeather';
 import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import Form from './components/form';
@@ -30,15 +30,21 @@ class App extends React.Component {
       this.getComponent(this.state);
     }
   }
+  //grabs the props from <Form>
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
-
+  //handles submit on the form and runs the api call
+  onSubmit = e => {
+    e.preventDefault();
+    this.fetchWeatherData();
+    this.setState({ fetchedweatherdata: !this.state.fetchedweatherdata });
+  };
   fetchWeatherData = async e => {
-    const city = this.props.city;
-    const country = this.props.country;
+    const city = this.state.city;
+    const country = this.state.country;
 
     console.log(city, country);
     const PATH_BASE = 'https://api.openweathermap.org/';
@@ -121,11 +127,7 @@ array.forEach
           <Form
             onChange={this.handleChange}
             {...this.state}
-            fetchWeatherData={this.fetchWeatherData}
-            onSubmit={() => {
-              this.onSubmit();
-              this.fetchWeatherData(this.state.city, this.state.country);
-            }}
+            onSubmit={this.onSubmit}
           />
         );
 

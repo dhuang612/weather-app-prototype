@@ -3,9 +3,6 @@ import React from 'react';
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fetchedWeatherdata: false
-    };
   }
   /*
   handleChange = e => {
@@ -18,7 +15,7 @@ class Form extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     // alert('state of city and country:' + this.state.city, this.state.country);
-    // alert('a form was submitted!');
+    //alert('a form was submitted!');
     this.setState(
       {
         fetchedWeatherdata: !this.state.fetchedWeatherdata
@@ -32,7 +29,7 @@ class Form extends React.Component {
 
     return (
       <form
-        onSubmit={this.onSubmit}
+        onSubmit={this.props.onSubmit}
         //loadWeather={(this.state.city, this.state.country)}
       >
         Please enter US city name for weather information <br />

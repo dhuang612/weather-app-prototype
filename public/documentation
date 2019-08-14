@@ -2,6 +2,11 @@ Debugging in the Editor as an alternative to eslint in the console.
 https://facebook.github.io/create-react-app/docs/setting-up-your-editor
 Visual Studio Code
 
+///////////////
+suggested from meetup group
+front_end_masters
+///////////////
+
 Developing Components in Isolation
 storybook for React or other 3rd party tools can allow you to see the individual states
 within component
@@ -64,6 +69,9 @@ the values isn't working
 ==> will review this tomorrow.
 
 https://www.robinwieruch.de/conditional-rendering-react/#switch-case-operator
+
+
+
 
 componentDidUpdate(previousProps, nextprops)
 ////   
