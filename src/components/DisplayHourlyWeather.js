@@ -9,7 +9,12 @@ class HourlyWeather extends Component {
     this.state = {
       HourlyWeather: this.props.hourlyWeather,
       HourlyData: [],
-      savedcurrentweather: this.props.currentweatherinfo
+
+      currentforecast: this.props.currentforecast,
+      currenttime: this.props.currenttime,
+      currentweather: this.props.currentweather,
+
+      weatherIcon: this.props.weatherIcon
     };
   }
 
@@ -21,20 +26,20 @@ class HourlyWeather extends Component {
 
   sortHourlyData = data => {
     //getting info from state and putting information into array.
-    const dataSet = this.state.HourlyWeather.map(item => ({
+    const dataSet = this.props.hourlyWeather.map(item => ({
       day: item.dt_txt,
       dt: item.dt,
       temp: item.temp,
       weather: item.weather.main,
       weatherIcon: item.weatherIcon
     }));
-
+    /*
     const AddIdToSortedData = dataSet.forEach((item, i) => {
       item.id = i + 1;
 
       console.log(dataSet);
     });
-
+*/
     this.setState({ HourlyData: dataSet });
 
     //next steps get data from new object and sort into arrays to save in state.

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import HourlyWeather from '../components/DisplayHourlyWeather';
+import DisplayHourlyWeather from '../components/DisplayHourlyWeather';
 
 import './DisplayWeather.css';
 
@@ -11,16 +11,33 @@ class DisplayWeather extends Component {
       currentforecast: this.props.currentforecast,
       currenttime: this.props.currenttime,
       currentweather: this.props.currentweather,
-      hourlyWeather: [],
-      weatherIcon: this.props.weatherIcon
+      weatherIcon: this.props.weatherIcon,
+      hourlyWeather: this.props.hourlyWeather,
+      showHourly: false
     };
   }
 
   //not being able to add this.fetchWeatherData to this is causing it to remount.
   componentDidMount() {
     console.log('I am mounting');
-    console.log(this.props);
+    console.log(this.props.hourlyWeather);
   }
+  switchToHourly = () => {
+    this.setState({
+      showHourly: !this.state.showHourly
+    });
+  };
+  showCurrentWeatherorHourly = () => {
+    if (this.state.showHourly) {
+      return (
+        <div>
+          <DisplayHourlyWeather hourlyWeather={this.props.hourlyWeather} />
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
 
   render() {
     const {
@@ -33,40 +50,48 @@ class DisplayWeather extends Component {
       weatherIcon
     } = this.state;
 
-    console.log(this.state);
+    console.log(this.props);
     return (
       <div className="ui container">
+        {this.showCurrentWeatherorHourly()}
         <br />
-        <h1>Current temperature</h1>
-        <table className="ui basic table">
-          <thead>
-            <tr>
-              <th> time</th>
-              <th> temp</th>
-              <th> weather</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div className="day">{currenttime}</div>
-              </td>
-              <td>{currentforecast}</td>
-              <div>
-                <td>
-                  <img
-                    src={
-                      'https://openweathermap.org/img/wn/' +
-                      weatherIcon +
-                      '.png'
-                    }
-                  />
-                  {currentweather}
-                </td>
-              </div>
-            </tr>
-          </tbody>
-        </table>
+        {this.state.showHourly ? null : (
+          <div>
+            <h1>Current temperature</h1>
+
+            <table className="ui basic table">
+              <thead>
+                <tr>
+                  <th> time</th>
+                  <th> temp</th>
+                  <th> weather</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="day">{this.props.currenttime}</div>
+                  </td>
+                  <td>{this.props.currentforecast}</td>
+                  <div>
+                    <td>
+                      <img
+                        src={
+                          'https://openweathermap.org/img/wn/' +
+                          this.props.weatherIcon +
+                          '.png'
+                        }
+                      />
+                      {this.props.currentweather}
+                    </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        <button onClick={this.switchToHourly}>switch to hourly</button>
       </div>
     );
   }

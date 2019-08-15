@@ -4,7 +4,7 @@ import DisplayWeather from './components/DisplayWeather';
 import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import Form from './components/form';
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 import './App.css';
 
 //confirming that the api key is available also checking if in dev / prod
@@ -17,19 +17,14 @@ class App extends React.Component {
       currentforecast: '',
       currenttime: '',
       currentweather: '',
-      hourlyWeather: [],
+      hourlyWeather: this.props.hourlyWeather,
       weatherIcon: '',
       fetchedweatherdata: false,
       city: this.props.city,
       country: this.props.country
     };
   }
-  componentDidUpdate(prevState) {
-    if (this.state.fetchedweatherdata !== prevState.fetchedweatherdata) {
-      console.log('city and country:' + this.state.city, this.state.country);
-      this.getComponent(this.state);
-    }
-  }
+
   //grabs the props from <Form>
   handleChange = e => {
     this.setState({
@@ -106,7 +101,43 @@ array.forEach
       weatherIcon: sortedData[0].weatherIcon
     });
   };
-  getComponent(props = {} || this.props, state) {
+  showFormorCurrentWeather = () => {
+    if (!this.state.fetchedweatherdata) {
+      return (
+        <Form
+          onChange={this.handleChange}
+          {...this.state}
+          onSubmit={this.onSubmit}
+        />
+      );
+    } else {
+      return (
+        <DisplayWeather
+          currentweather={this.state.currentweather}
+          currentforecast={this.state.currentforecast}
+          currenttime={this.state.currenttime}
+          weatherIcon={this.state.weatherIcon}
+          hourlyWeather={this.state.hourlyWeather}
+        />
+      );
+    }
+  };
+
+  render() {
+    const { loadWeather } = this.state;
+    console.log(this.state);
+    return (
+      <div className="App">
+        <h1>Weather forecast</h1>
+        {this.showFormorCurrentWeather()}
+      </div>
+    );
+  }
+}
+
+export default App;
+/*
+getComponent(weather) {
     switch (this.state.weather) {
       case !this.fetchedweatherdata:
         return (
@@ -135,25 +166,4 @@ array.forEach
         return null;
     }
   }
-
-  render() {
-    const { loadWeather } = this.state;
-    console.log(this.state);
-    return (
-      <div className="App">
-        <h1>Weather forecast</h1>
-
-        {this.getComponent(this.state)}
-      </div>
-    );
-  }
-}
-
-export default App;
-/*
-   <Form 
-    onSubmit={this.onSubmit}
-    loadWeather={this.props.loadWeather}
-    fetchWeatherData={this.fetchWeatherData}
-/>
 */

@@ -12,18 +12,6 @@ class Form extends React.Component {
     });
   };*/
 
-  onSubmit = e => {
-    e.preventDefault();
-    // alert('state of city and country:' + this.state.city, this.state.country);
-    //alert('a form was submitted!');
-    this.setState(
-      {
-        fetchedWeatherdata: !this.state.fetchedWeatherdata
-      },
-      console.log(this.state.fetchedWeatherdata)
-    );
-  };
-
   render() {
     const { country, city } = this.props;
 
