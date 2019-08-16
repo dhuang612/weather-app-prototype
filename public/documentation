@@ -48,29 +48,14 @@ https://medium.com/@peterekeneeze/build-a-react-js-weather-app-with-stateless-fu
 I should break this down into more parts 
 
 
-react switch components
--> moved data down to app
--> resolved api call out!
-need to fix and resolve switching out components
-=== found a method involving switch ===
-got the switch function working with help from the internet.
-currently trying to get the conditions to render correctly.
-need to investigate into this more.
 
-updated code on form so that when you onSubmit the form
-this.setState updates fetchedWeatherData to be true.
-this has now fixed the form being shown first.
-what is still not working is the data from the form is not
-being passed to <DisplayWeather>
+contributing to projects 
+https://www.reddit.com/r/reactjs/comments/ac24zo/open_source_projects_a_beginner_can_contribute_to/
 
-updated Stackoverflow question and asked multiple times on the internet
-update the state under <App> because the way I am currently trying to store
-the values isn't working
-==> will review this tomorrow.
+https://github.com/MunGell/awesome-for-beginners
 
-https://www.robinwieruch.de/conditional-rendering-react/#switch-case-operator
-
-
+geolocation:
+https://itnext.io/creating-react-useposition-hook-for-getting-browsers-geolocation-2f27fc1d96de?gi=436205b6f4fa
 
 
 componentDidUpdate(previousProps, nextprops)

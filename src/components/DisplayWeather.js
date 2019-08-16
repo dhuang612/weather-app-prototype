@@ -17,10 +17,9 @@ class DisplayWeather extends Component {
     };
   }
 
-  //not being able to add this.fetchWeatherData to this is causing it to remount.
   componentDidMount() {
     console.log('I am mounting');
-    console.log(this.props.hourlyWeather);
+    console.log(this.props.hourlyWeather, this.props.fetchedWeatherData);
   }
   switchToHourly = () => {
     this.setState({
@@ -98,25 +97,3 @@ class DisplayWeather extends Component {
 }
 
 export default DisplayWeather;
-
-/*
-
- if (!showHourlyWeather) {
-      return (
-        <HourlyWeather
-          hourlyWeather={this.state.hourlyWeather}
-          currentweatherinfo={this.state.currentweatherinfo}
-        />
-      );
-    }
-  }
-}
-//don't believe this does anything.
-hourlyWeatherData = () => {
-    const { hourlyWeather } = this.state;
-    console.log(hourlyWeather);
-  };
-
-
-
-*/

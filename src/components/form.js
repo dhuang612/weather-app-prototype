@@ -4,13 +4,6 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
   }
-  /*
-  handleChange = e => {
-    this.setState({
-      [e.target.city]: e.target.value,
-      [e.target.country]: e.target.value
-    });
-  };*/
 
   render() {
     const { country, city } = this.props;

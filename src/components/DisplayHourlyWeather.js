@@ -45,14 +45,6 @@ class HourlyWeather extends Component {
     //next steps get data from new object and sort into arrays to save in state.
   };
 
-  /*
- ? (
-        <div>
-          <Form loadWeather={this.fetchWeatherData} />
-        </div>
-      ) : (
-  */
-
   render() {
     const { HourlyData, showCurrentWeather, HourlyWeather } = this.state;
 
