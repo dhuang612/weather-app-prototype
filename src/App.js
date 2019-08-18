@@ -21,7 +21,8 @@ class App extends React.Component {
       weatherIcon: '',
       fetchedweatherdata: false,
       city: this.props.city,
-      country: this.props.country
+      country: this.props.country,
+      showHourly: false
     };
   }
 
@@ -35,8 +36,8 @@ class App extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     this.fetchWeatherData();
-
-    this.setState({ fetchedweatherdata: !this.state.fetchedweatherdata }, () =>
+    //this second convertion for rendering is screwing up my return to form.
+    this.setState({ fetchedweatherdata: true }, () =>
       console.log(this.state.fetchedweatherdata)
     );
   };
@@ -115,6 +116,7 @@ array.forEach
       );
     } else {
       return (
+        //add in some sort of conditional statement here?
         <div>
           <DisplayWeather
             currentweather={this.state.currentweather}
@@ -122,14 +124,8 @@ array.forEach
             currenttime={this.state.currenttime}
             weatherIcon={this.state.weatherIcon}
             hourlyWeather={this.state.hourlyWeather}
+            showHourly={this.state.showHourly}
           />
-          <Navbar fetchedweatherdata={this.state.fetchedweatherdata}>
-            <Form
-              onChange={this.handleChange}
-              {...this.state}
-              onSubmit={this.onSubmit}
-            />
-          </Navbar>
         </div>
       );
     }
@@ -139,6 +135,14 @@ array.forEach
     return (
       <div className="App">
         <h1>Weather forecast</h1>
+        <Navbar fetchedweatherdata={this.state.fetchedweatherdata}>
+          <Form
+            showHourly={this.state.showHourly}
+            onChange={this.handleChange}
+            {...this.state}
+            onSubmit={this.onSubmit}
+          />
+        </Navbar>
         {this.showFormorCurrentWeather()}
       </div>
     );

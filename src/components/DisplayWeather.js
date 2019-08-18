@@ -13,7 +13,7 @@ class DisplayWeather extends Component {
       currentweather: this.props.currentweather,
       weatherIcon: this.props.weatherIcon,
       hourlyWeather: this.props.hourlyWeather,
-      showHourly: false
+      showHourly: this.props.showHourly
     };
   }
 

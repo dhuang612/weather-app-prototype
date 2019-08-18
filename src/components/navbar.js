@@ -7,7 +7,8 @@ class Navbar extends React.Component {
     this.state = {
       fetchedweatherdata: this.props.children.props.fetchedweatherdata,
       city: this.props.children.props.city,
-      country: this.props.children.props.country
+      country: this.props.children.props.country,
+      showHourly: this.props.children.props.showHourly
     };
   }
   componentDidMount() {
@@ -17,8 +18,11 @@ class Navbar extends React.Component {
 
   resetState = () => {
     this.setState(
-      { fetchedweatherdata: !this.state.fetchedweatherdata },
-      console.log(this.state.fetchedweatherdata)
+      {
+        fetchedweatherdata: !this.state.fetchedweatherdata,
+        showHourly: !this.state.showHourly
+      },
+      console.log(this.state.fetchedweatherdata, this.state.showHourly)
     );
   };
 
@@ -28,12 +32,13 @@ class Navbar extends React.Component {
     console.log(
       //this.props.children.props.onChange,
       //this.props.children.props.onSubmit,
-      this.props.children.props.fetchedweatherdata,
-      this.props.children.props.city
+      //this.props.children.props.fetchedweatherdata,
+      this.props.children.props.city,
+      this.state.fetchedweatherdata
     );
     return (
       <div>
-        {!this.state.fetchedweatherdata ? (
+        {this.state.fetchedweatherdata ? (
           <div>
             <button onClick={this.resetState}>return to form</button>
           </div>
@@ -50,3 +55,7 @@ class Navbar extends React.Component {
   }
 }
 export default Navbar;
+
+/*
+
+*/
