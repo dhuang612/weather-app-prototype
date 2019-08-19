@@ -25,6 +25,9 @@ class App extends React.Component {
       showHourly: false
     };
   }
+  componentDidMount() {
+    this.showFormorCurrentWeather();
+  }
 
   //grabs the props from <Form> for state and country
   handleChange = e => {
@@ -37,7 +40,7 @@ class App extends React.Component {
     e.preventDefault();
     this.fetchWeatherData();
     //this second convertion for rendering is screwing up my return to form.
-    this.setState({ fetchedweatherdata: true }, () =>
+    this.setState({ fetchedweatherdata: !this.state.fetchedweatherdata }, () =>
       console.log(this.state.fetchedweatherdata)
     );
   };
@@ -143,6 +146,7 @@ array.forEach
             onSubmit={this.onSubmit}
           />
         </Navbar>
+
         {this.showFormorCurrentWeather()}
       </div>
     );
@@ -150,3 +154,11 @@ array.forEach
 }
 
 export default App;
+/*
+ {this.state.fetchedweatherdata ? (
+          <div>
+            <button onClick={this.resetState}>return to form</button>
+          </div>
+        ) : (
+
+*/

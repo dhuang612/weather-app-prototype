@@ -37,7 +37,7 @@ class Navbar extends React.Component {
       this.state.fetchedweatherdata
     );
     return (
-      <div>
+      <div className="navbar">
         {this.state.fetchedweatherdata ? (
           <div>
             <button onClick={this.resetState}>return to form</button>

@@ -90,7 +90,7 @@ class DisplayWeather extends Component {
           </div>
         )}
 
-        <button onClick={this.switchToHourly}>switch to hourly</button>
+        <button onClick={this.switchToHourly}>swap weather</button>
       </div>
     );
   }

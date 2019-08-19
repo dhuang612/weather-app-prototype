@@ -61,3 +61,7 @@ next steps is to try and use a conditional statement to update this.
 other idea for the navbar move it to be under <App>?
 
 hard set fetchedweatherdata to be true under App and then add it as a props on form under navbar
+
+https://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
+
+
