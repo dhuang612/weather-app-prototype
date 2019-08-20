@@ -5,6 +5,7 @@ import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import Form from './components/form';
 import axios from 'axios';
 import Navbar from './components/navbar';
+import { Route } from 'react-router-dom';
 import './App.css';
 
 //confirming that the api key is available also checking if in dev / prod
@@ -138,14 +139,37 @@ array.forEach
     return (
       <div className="App">
         <h1>Weather forecast</h1>
-        <Navbar fetchedweatherdata={this.state.fetchedweatherdata}>
-          <Form
-            showHourly={this.state.showHourly}
-            onChange={this.handleChange}
-            {...this.state}
-            onSubmit={this.onSubmit}
-          />
-        </Navbar>
+        <Route
+          path="/current"
+          render={props => (
+            <DisplayWeather
+              {...props}
+              currentweather={this.state.currentweather}
+              currentforecast={this.state.currentforecast}
+              currenttime={this.state.currenttime}
+              weatherIcon={this.state.weatherIcon}
+              hourlyWeather={this.state.hourlyWeather}
+              showHourly={this.state.showHourly}
+            />
+          )}
+        />
+        <Route
+          path="/form"
+          render={props => (
+            <Form
+              {...props}
+              onChange={this.handleChange}
+              {...this.state}
+              onSubmit={this.onSubmit}
+            />
+          )}
+        />
+        <Route
+          path="/hourly"
+          render={props => (
+            <DisplayHourlyWeather hourlyWeather={this.state.hourlyWeather} />
+          )}
+        />
 
         {this.showFormorCurrentWeather()}
       </div>

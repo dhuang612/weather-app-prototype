@@ -89,7 +89,7 @@ class DisplayWeather extends Component {
             </table>
           </div>
         )}
-
+        <Link to="/form">Click here to go back to form</Link>
         <button onClick={this.switchToHourly}>swap weather</button>
       </div>
     );
