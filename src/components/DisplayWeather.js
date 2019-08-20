@@ -52,6 +52,8 @@ class DisplayWeather extends Component {
     console.log(this.props);
     return (
       <div className="ui container">
+        <Link to="/">Click here to go back to form</Link>
+
         {this.showCurrentWeatherorHourly()}
         <br />
         {this.state.showHourly ? null : (
@@ -89,7 +91,7 @@ class DisplayWeather extends Component {
             </table>
           </div>
         )}
-        <Link to="/form">Click here to go back to form</Link>
+
         <button onClick={this.switchToHourly}>swap weather</button>
       </div>
     );

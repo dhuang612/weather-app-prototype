@@ -53,15 +53,18 @@ https://itnext.io/creating-react-useposition-hook-for-getting-browsers-geolocati
 
 //////////
 currently working on:
+still having a display issue because of how the app is setup.
+two big problems:
+switching from form to display weather leaves the form showing
+switching from display weather back to form leaves display weather showing
 
-got the secondary form to render correctly.
-however because I am flipping fetchedweatherdata so often it is stopping me from rendering current weather
-second error is the second form I am rendering shows <CurrentWeather> underneath because I am showing them together
-next steps is to try and use a conditional statement to update this.
-other idea for the navbar move it to be under <App>?
+some general ideas I've seen so far include
+using location to skip around the navigation and only show one component
+
 
 hard set fetchedweatherdata to be true under App and then add it as a props on form under navbar
 
 https://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
-
+//routing issues 
+https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually

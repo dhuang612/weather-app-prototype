@@ -5,7 +5,7 @@ import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import Form from './components/form';
 import axios from 'axios';
 import Navbar from './components/navbar';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 //confirming that the api key is available also checking if in dev / prod
@@ -27,7 +27,7 @@ class App extends React.Component {
     };
   }
   componentDidMount() {
-    this.showFormorCurrentWeather();
+    this.showCurrentWeather();
   }
 
   //grabs the props from <Form> for state and country
@@ -109,18 +109,9 @@ array.forEach
       weatherIcon: sortedData[0].weatherIcon
     });
   };
-  showFormorCurrentWeather = () => {
-    if (!this.state.fetchedweatherdata) {
+  showCurrentWeather = () => {
+    if (this.state.fetchedweatherdata) {
       return (
-        <Form
-          onChange={this.handleChange}
-          {...this.state}
-          onSubmit={this.onSubmit}
-        />
-      );
-    } else {
-      return (
-        //add in some sort of conditional statement here?
         <div>
           <DisplayWeather
             currentweather={this.state.currentweather}
@@ -132,6 +123,11 @@ array.forEach
           />
         </div>
       );
+    } else {
+      return (
+        //add in some sort of conditional statement here?
+        null
+      );
     }
   };
 
@@ -139,6 +135,7 @@ array.forEach
     return (
       <div className="App">
         <h1>Weather forecast</h1>
+
         <Route
           path="/current"
           render={props => (
@@ -154,7 +151,8 @@ array.forEach
           )}
         />
         <Route
-          path="/form"
+          path="/"
+          exact
           render={props => (
             <Form
               {...props}
@@ -171,7 +169,7 @@ array.forEach
           )}
         />
 
-        {this.showFormorCurrentWeather()}
+        {this.showCurrentWeather()}
       </div>
     );
   }
