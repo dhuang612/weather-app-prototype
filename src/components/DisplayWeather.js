@@ -4,6 +4,13 @@ import DisplayHourlyWeather from '../components/DisplayHourlyWeather';
 
 import './DisplayWeather.css';
 
+const location = {
+  pathname: '/',
+  state: {
+    fetchedWeatherData: false
+  }
+};
+
 class DisplayWeather extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +59,7 @@ class DisplayWeather extends Component {
     console.log(this.props);
     return (
       <div className="ui container">
-        <Link to="/">Click here to go back to form</Link>
+        <Link to={location}>Click here to go back to form</Link>
 
         {this.showCurrentWeatherorHourly()}
         <br />

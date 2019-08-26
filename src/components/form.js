@@ -7,6 +7,8 @@ class Form extends React.Component {
 
   render() {
     const { country, city } = this.props;
+    //I now have access to match history etc with routeProps for Form
+    console.log(this.props);
 
     return (
       <form

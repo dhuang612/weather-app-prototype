@@ -57,9 +57,7 @@ class App extends React.Component {
     const units = 'imperial';
     const cnt = 10;
 
-    const url = `${PATH_BASE}${REQ_PATH}q=${city},${country}&APPID=${
-      process.env.REACT_APP_WEATHER_API_KEY
-    }&units=${units}&cnt=${cnt}`;
+    const url = `${PATH_BASE}${REQ_PATH}q=${city},${country}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}&cnt=${cnt}`;
 
     const response = await axios.get(url);
     this.sortData(response.data);
@@ -153,8 +151,9 @@ array.forEach
         <Route
           path="/"
           exact
-          render={props => (
+          render={(routeProps, props) => (
             <Form
+              {...routeProps}
               {...props}
               onChange={this.handleChange}
               {...this.state}
