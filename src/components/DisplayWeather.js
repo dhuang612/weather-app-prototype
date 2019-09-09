@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import DisplayHourlyWeather from '../components/DisplayHourlyWeather';
 
+import DisplayHourlyWeather from '../components/DisplayHourlyWeather';
+import Form from './form';
 import './DisplayWeather.css';
 
 class DisplayWeather extends Component {
@@ -14,7 +14,8 @@ class DisplayWeather extends Component {
       weatherIcon: this.props.weatherIcon,
       hourlyWeather: this.props.hourlyWeather,
       showHourly: this.props.showHourly,
-      fetchedWeatherData: this.props.fetchedWeatherData
+      fetchedWeatherData: this.props.fetchedWeatherData,
+      showForm: false
     };
   }
 
@@ -27,6 +28,12 @@ class DisplayWeather extends Component {
       showHourly: !this.state.showHourly
     });
   };
+
+  switchToForm = () => {
+    this.setState({
+      showForm: !this.state.showForm
+    });
+  };
   showCurrentWeatherorHourly = () => {
     if (this.state.showHourly) {
       return (
@@ -34,8 +41,13 @@ class DisplayWeather extends Component {
           <DisplayHourlyWeather hourlyWeather={this.props.hourlyWeather} />
         </div>
       );
-    } else {
-      return null;
+    } else if (this.state.showForm) {
+      return (
+        <Form
+          onChange={this.props.handleChange}
+          onSubmit={this.props.onSubmit}
+        />
+      );
     }
   };
 
@@ -53,13 +65,12 @@ class DisplayWeather extends Component {
     console.log(this.props);
     return (
       <div className="ui container">
-        <Link to="/">Click here to go back to form</Link>
         {this.showCurrentWeatherorHourly()}
         <br />
         {this.state.showHourly ? null : (
           <div>
             <h1>Current temperature</h1>
-
+            <button onClick={this.switchToForm}>switch to Form</button>
             <table className="ui basic table">
               <thead>
                 <tr>

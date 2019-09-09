@@ -117,12 +117,14 @@ array.forEach
             weatherIcon={this.state.weatherIcon}
             hourlyWeather={this.state.hourlyWeather}
             showHourly={this.state.showHourly}
-            fetchedweatherdata={!this.state.fetchedweatherdata}
+            onChange={this.handleChange}
+            onSubmit={this.onSubmit}
+            fetchedweatherdata={!this.fetchedweatherdata}
           />
         </div>
       );
-    } else {
-      return null;
+    } else if (!this.state.fetchedweatherdata) {
+      return <Form onChange={this.handleChange} onSubmit={this.onSubmit} />;
     }
   };
 
@@ -130,41 +132,7 @@ array.forEach
     return (
       <div className="App">
         <h1>Weather forecast</h1>
-        <Route
-          path="/current"
-          render={props => (
-            <DisplayWeather
-              {...props}
-              currentweather={this.state.currentweather}
-              currentforecast={this.state.currentforecast}
-              currenttime={this.state.currenttime}
-              weatherIcon={this.state.weatherIcon}
-              hourlyWeather={this.state.hourlyWeather}
-              showHourly={this.state.showHourly}
-            />
-          )}
-        />
-        <Route
-          path="/"
-          exact
-          render={(routeProps, props) =>
-            this.state.fetchedweatherdata ? null : (
-              <Form
-                {...routeProps}
-                {...props}
-                onChange={this.handleChange}
-                {...this.state}
-                onSubmit={this.onSubmit}
-              />
-            )
-          }
-        />
-        <Route
-          path="/hourly"
-          render={props => (
-            <DisplayHourlyWeather hourlyWeather={this.state.hourlyWeather} />
-          )}
-        />
+
         {this.showCurrentWeather()}
       </div>
     );

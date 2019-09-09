@@ -61,6 +61,9 @@ switching from display weather back to form leaves display weather showing
 some general ideas I've seen so far include
 using location to skip around the navigation and only show one component
 
+use CSS to hide components 
+https://agilewarrior.wordpress.com/2017/10/10/how-to-hide-elements-the-reactjs-way/
+
 
 hard set fetchedweatherdata to be true under App and then add it as a props on form under navbar
 //setting up express backend to run the routes for weather app

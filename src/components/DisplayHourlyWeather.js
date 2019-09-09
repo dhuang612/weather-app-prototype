@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { isTemplateElement } from '@babel/types';
-import { Link } from 'react-router-dom';
 import DisplayWeather from './DisplayWeather';
 //refactor the dataset so that there are less pieces of state
 class HourlyWeather extends Component {
@@ -9,11 +8,9 @@ class HourlyWeather extends Component {
     this.state = {
       HourlyWeather: this.props.hourlyWeather,
       HourlyData: [],
-
       currentforecast: this.props.currentforecast,
       currenttime: this.props.currenttime,
       currentweather: this.props.currentweather,
-
       weatherIcon: this.props.weatherIcon
     };
   }
@@ -50,41 +47,39 @@ class HourlyWeather extends Component {
 
     console.log(HourlyData);
     return (
-      <div>
+      <div className="ui container">
         <h1>Hourly weather</h1>
-        {HourlyData.map((item, index) => {
-          return (
-            <div className="ui container">
-              <table className="ui basic table">
-                <thead>
-                  <tr className="center aligned six wide">
-                    <th className="center aligned six wide">time</th>
-                    <th className="center aligned six wide">temperature</th>
-                    <th className="center aligned six wide">weather</th>
-                    <th className="center aligned six wide">
-                      <img
-                        src={
-                          'https://openweathermap.org/img/wn/' +
-                          item.weatherIcon +
-                          '.png'
-                        }
-                      />
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="center aligned">
-                    <td key={item.id} className="center aligned six wide">
-                      {item.dt}
-                    </td>
-                    <td className="center aligned six wide">{item.temp}</td>
-                    <td className="center aligned six wide">{item.weather}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          );
-        })}
+        {HourlyData.map((item, index) => (
+          <div className="ui container">
+            <table className="ui basic table">
+              <thead>
+                <tr className="center aligned six wide">
+                  <th className="center aligned six wide">time</th>
+                  <th className="center aligned six wide">temperature</th>
+                  <th className="center aligned six wide">weather</th>
+                  <th className="center aligned six wide">
+                    <img
+                      src={
+                        'https://openweathermap.org/img/wn/' +
+                        item.weatherIcon +
+                        '.png'
+                      }
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="center aligned">
+                  <td key={item.id} className="center aligned six wide">
+                    {item.dt}
+                  </td>
+                  <td className="center aligned six wide">{item.temp}</td>
+                  <td className="center aligned six wide">{item.weather}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ))}
       </div>
     );
   }
