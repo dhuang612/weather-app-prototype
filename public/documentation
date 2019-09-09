@@ -63,7 +63,8 @@ using location to skip around the navigation and only show one component
 
 
 hard set fetchedweatherdata to be true under App and then add it as a props on form under navbar
-
+//setting up express backend to run the routes for weather app
+https://medium.com/@maison.moa/setting-up-an-express-backend-server-for-create-react-app-bc7620b20a61
 https://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
 
 //routing issues 

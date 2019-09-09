@@ -5,7 +5,7 @@ import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import Form from './components/form';
 import axios from 'axios';
 import Navbar from './components/navbar';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 
 //confirming that the api key is available also checking if in dev / prod
@@ -40,7 +40,6 @@ class App extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     this.fetchWeatherData();
-    //this second convertion for rendering is screwing up my return to form.
     this.setState({ fetchedweatherdata: !this.state.fetchedweatherdata }, () =>
       console.log(this.state.fetchedweatherdata)
     );
@@ -118,14 +117,12 @@ array.forEach
             weatherIcon={this.state.weatherIcon}
             hourlyWeather={this.state.hourlyWeather}
             showHourly={this.state.showHourly}
+            fetchedweatherdata={!this.state.fetchedweatherdata}
           />
         </div>
       );
     } else {
-      return (
-        //add in some sort of conditional statement here?
-        null
-      );
+      return null;
     }
   };
 
@@ -133,7 +130,6 @@ array.forEach
     return (
       <div className="App">
         <h1>Weather forecast</h1>
-
         <Route
           path="/current"
           render={props => (
@@ -151,15 +147,17 @@ array.forEach
         <Route
           path="/"
           exact
-          render={(routeProps, props) => (
-            <Form
-              {...routeProps}
-              {...props}
-              onChange={this.handleChange}
-              {...this.state}
-              onSubmit={this.onSubmit}
-            />
-          )}
+          render={(routeProps, props) =>
+            this.state.fetchedweatherdata ? null : (
+              <Form
+                {...routeProps}
+                {...props}
+                onChange={this.handleChange}
+                {...this.state}
+                onSubmit={this.onSubmit}
+              />
+            )
+          }
         />
         <Route
           path="/hourly"
@@ -167,7 +165,6 @@ array.forEach
             <DisplayHourlyWeather hourlyWeather={this.state.hourlyWeather} />
           )}
         />
-
         {this.showCurrentWeather()}
       </div>
     );
@@ -175,11 +172,3 @@ array.forEach
 }
 
 export default App;
-/*
- {this.state.fetchedweatherdata ? (
-          <div>
-            <button onClick={this.resetState}>return to form</button>
-          </div>
-        ) : (
-
-*/

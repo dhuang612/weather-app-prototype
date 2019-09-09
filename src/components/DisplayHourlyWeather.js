@@ -91,8 +91,3 @@ class HourlyWeather extends Component {
 }
 
 export default HourlyWeather;
-
-/*
- 
-
-*/
