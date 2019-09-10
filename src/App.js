@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
 import DisplayWeather from './components/DisplayWeather';
-import DisplayHourlyWeather from './components/DisplayHourlyWeather';
 import Form from './components/form';
 import axios from 'axios';
-import Navbar from './components/navbar';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import './App.css';
 
 //confirming that the api key is available also checking if in dev / prod
@@ -23,7 +21,7 @@ class App extends React.Component {
       fetchedweatherdata: false,
       city: this.props.city,
       country: this.props.country,
-      showHourly: false
+      showWeather: false
     };
   }
   componentDidMount() {
@@ -116,7 +114,7 @@ array.forEach
             currenttime={this.state.currenttime}
             weatherIcon={this.state.weatherIcon}
             hourlyWeather={this.state.hourlyWeather}
-            showHourly={this.state.showHourly}
+            showWeather={!this.state.showWeather}
             onChange={this.handleChange}
             onSubmit={this.onSubmit}
             fetchedweatherdata={!this.fetchedweatherdata}

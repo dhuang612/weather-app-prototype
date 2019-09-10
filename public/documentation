@@ -58,6 +58,10 @@ two big problems:
 switching from form to display weather leaves the form showing
 switching from display weather back to form leaves display weather showing
 
+tear down app a bit, instead of also showing hourly.
+switch it so only Form And display Weather show
+then add in a bunch of css.
+
 some general ideas I've seen so far include
 using location to skip around the navigation and only show one component
 

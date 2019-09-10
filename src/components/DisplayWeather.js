@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import DisplayHourlyWeather from '../components/DisplayHourlyWeather';
 import Form from './form';
 import './DisplayWeather.css';
 
@@ -13,7 +12,7 @@ class DisplayWeather extends Component {
       currentweather: this.props.currentweather,
       weatherIcon: this.props.weatherIcon,
       hourlyWeather: this.props.hourlyWeather,
-      showHourly: this.props.showHourly,
+      showHourly: this.props.showWeather,
       fetchedWeatherData: this.props.fetchedWeatherData,
       showForm: false
     };
@@ -23,54 +22,19 @@ class DisplayWeather extends Component {
     console.log('I am mounting');
     console.log(this.props.hourlyWeather, this.props.fetchedWeatherData);
   }
-  switchToHourly = () => {
+  toggleShowForm = () => {
     this.setState({
-      showHourly: !this.state.showHourly
+      showForm: !this.showForm
     });
   };
 
-  switchToForm = () => {
-    this.setState({
-      showForm: !this.state.showForm
-    });
-  };
-  showCurrentWeatherorHourly = () => {
-    if (this.state.showHourly) {
+  showFormOrWeather = () => {
+    if (!this.state.showForm) {
       return (
-        <div>
-          <DisplayHourlyWeather hourlyWeather={this.props.hourlyWeather} />
-        </div>
-      );
-    } else if (this.state.showForm) {
-      return (
-        <Form
-          onChange={this.props.handleChange}
-          onSubmit={this.props.onSubmit}
-        />
-      );
-    }
-  };
-
-  render() {
-    const {
-      currentforecast,
-      currenttime,
-      currentweather,
-      fetchedWeatherData,
-      hourlyWeather,
-      showHourlyWeather,
-      weatherIcon
-    } = this.state;
-
-    console.log(this.props);
-    return (
-      <div className="ui container">
-        {this.showCurrentWeatherorHourly()}
-        <br />
-        {this.state.showHourly ? null : (
+        <div className="ui container">
+          <br />
           <div>
             <h1>Current temperature</h1>
-            <button onClick={this.switchToForm}>switch to Form</button>
             <table className="ui basic table">
               <thead>
                 <tr>
@@ -101,12 +65,30 @@ class DisplayWeather extends Component {
               </tbody>
             </table>
           </div>
-        )}
+          <button onClick={this.toggleShowForm}>show form</button>
+        </div>
+      );
+    } else {
+      return <Form onChange={this.handleChange} onSubmit={this.onSubmit} />;
+    }
+  };
+  render() {
+    const {
+      currentforecast,
+      currenttime,
+      currentweather,
+      fetchedWeatherData,
+      hourlyWeather,
+      showHourlyWeather,
+      weatherIcon
+    } = this.state;
 
-        <button onClick={this.switchToHourly}>swap weather</button>
-      </div>
-    );
+    console.log(this.props);
+    return <div>{this.showFormOrWeather()}</div>;
   }
 }
 
 export default DisplayWeather;
+/*
+    <button onClick={this.switchToHourly}>swap weather</button>
+*/
